@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Digital Clock</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 10rem;
+      }
+
+      #clock {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #3e0000,
+            0 0 40px #3e0000, 0 0 50px #3e0000, 0 0 60px #3e0000,
+            0 0 70px #3e0000;
+        }
+        to {
+          text-shadow: 0 0 20px #fff, 0 0 30px #000, 0 0 40px #000,
+            0 0 50px #000, 0 0 60px #000, 0 0 70px #000, 0 0 80px #000;
+        }
+      }
+
+      .clock:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock"></div>
+
+    <script>
+      function Clock() {
+        const t = new Date();
+        let h = t.getHours().toString().padStart(2, "0");
+        const m = t.getMinutes().toString().padStart(2, "0");
+        const s = t.getSeconds().toString().padStart(2, "0");
+        amPm = "AM";
+        if (h >= 12) {
+          amPm = "PM";
+        } else {
+          amPm = "AM";
+        }
+        if (h > 12) {
+          h = h - 12;
+        }
+
+        const time = `${h}:${m}:${s}${amPm}`;
+
+        document.getElementById("clock").innerHTML = time;
+      }
+
+      setInterval(Clock, 1000);
+
+      Clock();
+    </script>
+  </body>
+</html>
